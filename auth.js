@@ -1,27 +1,16 @@
-const crypto = require('crypto');
+import crypto from 'crypto';
 
-function login(username, password) {
-  // 🧨 Security vulnerability: plain-text password check
-  if (username === 'admin' && password === 'admin123') {
-    return crypto.randomBytes(16).toString('hex'); // 🔐 No session tracking
+// Simple in-memory users (hashed passwords in real-world app)
+const users = {
+  admin: 'admin123',
+  user: 'password'
+};
+
+export function login(username, password) {
+  const storedPassword = users[username];
+  if (storedPassword && storedPassword === password) {
+    // In real applications: use JWT or session tokens
+    return crypto.randomBytes(16).toString('hex');
   }
   return null;
 }
-
-function validateToken(token) {
-  // ❗ Incomplete: accepts any non-null token
-  if (!token || token.length < 10) {
-    return false;
-  }
-  return true;
-}
-
-function insecureHash(data) {
-  // ❗ MD5 is deprecated
-  return crypto.createHash('md5').update(data).digest('hex');
-}
-
-module.exports = {
-  login,
-  validateToken
-};

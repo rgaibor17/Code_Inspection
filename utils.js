@@ -1,24 +1,7 @@
-function calculateTotal(numbers) {
-  let total = 0;
-  for (let i = 0; i < numbers.length; i++) {
-    total += numbers[i];
-  }
-  return total;
+export function calculateTotal(numbers) {
+  return numbers.reduce((sum, num) => sum + num, 0);
 }
 
-function sayHello() {
-  console.log("Hello, world!");
+export function greet(name, role = 'user') {
+  console.log(`Hello, ${role} ${name}`);
 }
-
-function greetUser(name) {
-  console.log("Hello, " + name);
-}
-
-function greetAdmin(name) { // ❗ Duplicated logic
-  console.log("Hello, " + name);
-}
-
-module.exports = {
-  calculateTotal,
-  sayHello
-};
